@@ -21,3 +21,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 *.cfg
+!example.cfg
+
+*.db
+*.exe
