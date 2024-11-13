@@ -1,7 +1,7 @@
 <script>
-    import  "../app.css";
+    import  "../../app.css";
 	import {browser} from '$app/environment';
-    export let data;
+	import { linkUtil } from "$lib/linkUtil";
     
     if (browser) {
         let windowWidth = window.innerWidth;
@@ -16,7 +16,7 @@
 
 <svelte:window on:resize={handleResize} />
 <div class='entry'>
-    {#each data.links as link}
+    {#each linkUtil.links as link}
         {#if link.id === 'profile'}
         <h1 class="font-bold">Welcome, {link.linkText}!</h1>
         {:else}

@@ -1,8 +1,8 @@
 <script>
 	import { linkUtil } from '$lib/linkUtil';
 	import '../app.css';
-	import Topbar from './TopBar.svelte';
-	import Entry from './Entry.svelte';
+	import Topbar from '$lib/components/TopBar.svelte';
+	let { children } = $props();
 	
 </script>
 
@@ -10,7 +10,7 @@
 	<Topbar data={linkUtil}/>
 
 	<main>
-		<Entry data={linkUtil}/>
+		{@render children()}
 	</main>
 
 	<footer>
