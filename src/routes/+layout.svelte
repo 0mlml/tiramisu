@@ -1,20 +1,21 @@
 <script>
-	import Header from './Header.svelte';
+	import { linkUtil } from '$lib/linkUtil';
 	import '../app.css';
+	import Topbar from './TopBar.svelte';
+	import Entry from './Entry.svelte';
 	
-	let { children } = $props();
 </script>
 
 <div class="app">
-	<Header />
+	<Topbar data={linkUtil}/>
 
 	<main>
-		{@render children()}
+		<Entry data={linkUtil}/>
 	</main>
 
 	<footer>
 		<p>
-			visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to learn about SvelteKit
+			Visit <a href="https://prorecovery.fi">prorecovery.fi</a> for more details
 		</p>
 	</footer>
 </div>
