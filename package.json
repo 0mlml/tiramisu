@@ -11,7 +11,7 @@
 		"build-server": "echo \"Building Golang binary...\" && go build -buildvcs=false -mod=readonly -v",
 		"build-full": "yarn build-app && yarn build-server",
 		"build": "yarn build-full",
-		"serve": "open-cli http://localhost:8080 && ./main"
+		"serve": "./main"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^5.0.0",
