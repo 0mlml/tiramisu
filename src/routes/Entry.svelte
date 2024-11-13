@@ -44,10 +44,10 @@
 	}
 
 	.continue {
-		background-color: #08af48;
+		background-color: #63c19d;
 	}
 
 	.quit {
-		background-color: #FF605C;
+		background-color: #B91C1C;
 	}
 </style>

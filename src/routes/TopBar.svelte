@@ -21,6 +21,10 @@
 
 </script>
 
+<svelte:head>
+  <link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
+</svelte:head>
+
 <svelte:window on:resize={handleResize} />
 <nav class={clicked? 'navbar-clicked' : 'navbar'}>
     <div class="menu-icon">
@@ -89,6 +93,8 @@
         grid-template-columns: 1fr 0.3fr;
         align-items: center;
         column-gap: 0.5em;  
+        font-family: 'League Spartan';
+        font-weight: 800;
     } 
     .navbar-item:hover{
         border-bottom: 4px solid #fff;
