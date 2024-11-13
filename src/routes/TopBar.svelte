@@ -86,7 +86,7 @@
         height: 4em;
         color: #FFF;   
         font-size: 1.5em; 
-        grid-template-columns: 0.4fr 0.5fr;
+        grid-template-columns: 1fr 0.3fr;
         align-items: center;
         column-gap: 0.5em;  
     } 
