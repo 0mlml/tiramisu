@@ -11,8 +11,8 @@
 
 		return async ({result}) => {
 			loading = false;
-      localStorage.setItem('auth_token', result.data.token);
-      goto('/');
+      		localStorage.setItem('auth_token', result.data.token);
+			window.location.reload();
 		};
 	}
 </script>

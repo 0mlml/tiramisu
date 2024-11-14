@@ -1,6 +1,8 @@
 import { serverAuth } from '$lib/server/api-client';
 import { error, redirect } from '@sveltejs/kit';
 
+const BASE_URL = 'http://localhost:8080/api';
+
 export const load = async ({ cookies }) => {
     const token = cookies.get('auth_token');
 
@@ -9,7 +11,7 @@ export const load = async ({ cookies }) => {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/api/questions', {
+        const response = await fetch(BASE_URL+'/questions', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -34,20 +36,19 @@ export const actions = {
         const token = cookies.get('auth_token');
         const formData = await request.formData();
         
-        // Convert form data to the expected format
         const answers = [];
         for (const [key, value] of formData.entries()) {
             if (key.startsWith('question_')) {
                 const id = key.replace('question_', '');
                 answers.push({
                     id,
-                    value: value
+                    question: value
                 });
             }
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/submit', {
+            const response = await fetch(BASE_URL+'/submit', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

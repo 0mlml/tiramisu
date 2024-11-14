@@ -48,7 +48,7 @@ export const actions = {
                 maxAge: 60 * 60 * 24 * 7,
             });
 
-            redirect(303, '/');
+            redirect(303, '/sign-in');
 
             return { success: true };
         } catch (err) {

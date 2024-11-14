@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import { LineChart } from 'recharts';
 
 	let submissions = [];
 	let questions = [];

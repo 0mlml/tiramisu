@@ -84,7 +84,7 @@
         height: 4em;
         color: #FFF;   
         font-size: 1.5em; 
-        grid-template-columns: 1fr 0.5fr;
+        grid-template-columns: 1fr 0.7fr;
         align-items: center;
         column-gap: 0.5em;  
         font-family: 'League Spartan';
