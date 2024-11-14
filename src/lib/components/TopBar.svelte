@@ -16,8 +16,7 @@
     function handleResize(){
             windowWidth = window.innerWidth;
             if(windowWidth >= 1024) clicked = false;
-        }
-
+    }
 </script>
 
 <svelte:head>

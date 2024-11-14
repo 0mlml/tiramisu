@@ -39,7 +39,7 @@
     <div class="w-full flex justify-center">
       <button
         type="submit"
-        class="bg-orange-600 hover:bg-orange-500 text-lg text-white rounded-full py-2 px-4"
+        class="submit text-lg text-white rounded-full py-2 px-4"
         >Submit</button
       >
     </div>
@@ -48,3 +48,9 @@
     </div>
   </form>
 </main>
+
+<style>
+  .submit {
+    background-color: #63c19d;
+  }
+</style>

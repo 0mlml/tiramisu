@@ -20,14 +20,12 @@ export const actions = {
     }
 
     try{
-        const token = await fetcher.loginUser(email, password)['data']['token'];
-
-        event.cookies.set("sessionID", token ?? "", {
+        const token = (await fetcher.loginUser(email, password))["data"]["token"];
+        event.cookies.set("auth_token", token ?? "", {
             path: "/",
-        })
-    
+        });    
     }catch (err) {
-        console.error("Error fetching token");
+        console.error("Error fetching token", err);
     }
 
     throw redirect(301, "/home");

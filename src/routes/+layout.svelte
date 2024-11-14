@@ -1,9 +1,17 @@
 <script>
 	import { linkUtil } from '$lib/linkUtil';
+	import { page } from '$app/stores';
 	import '../app.css';
 	import Topbar from '$lib/components/TopBar.svelte';
 	let { children } = $props();
-	
+
+	const profile = $page.data.profile || null;
+
+	if (profile !== null){
+		linkUtil['links']['linkText'] = profile['name'];
+	} else {
+		linkUtil['links']['linkText'] = "Sign in!";
+	}
 </script>
 
 <div class="app">

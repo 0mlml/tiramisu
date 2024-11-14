@@ -1,7 +1,5 @@
 import logo from './images/logo.svg';
-import profilePhoto from './images/profile.png'
-
-const name ='a'
+import profilePhoto from './images/profile.png';
 
 export const linkUtil = {
     logo: true,
@@ -14,7 +12,7 @@ export const linkUtil = {
     url:'#/profile',
     displayInNav: true,
     displayInFooter: true,
-    linkText: name,
+    linkText: "",
     picture: profilePhoto
     },
     ]
