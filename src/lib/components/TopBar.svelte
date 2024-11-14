@@ -1,5 +1,4 @@
 <script>
-    import  "../../app.css";
     import { browser } from '$app/environment';
 
     export let data;

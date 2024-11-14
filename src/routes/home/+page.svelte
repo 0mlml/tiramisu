@@ -1,8 +1,10 @@
 <script>
     import  "../../app.css";
-	import {browser} from '$app/environment';
+	import {browser} from "$app/environment";
 	import { linkUtil } from "$lib/linkUtil";
-    
+
+	export let data;
+
     if (browser) {
         let windowWidth = window.innerWidth;
     }
@@ -15,6 +17,13 @@
 </script>
 
 <svelte:window on:resize={handleResize} />
+{#if !isLoggedIn}
+<button on:click={goToLogin}>
+	Go to login!
+</button>
+
+{:else}
+
 <div class='entry'>
     {#each linkUtil.links as link}
         {#if link.id === 'profile'}
@@ -26,6 +35,8 @@
     <button class="entry-button continue text-white ring-2 rounded-md ring-green-800 transition-duration-300 transform hover:scale-105 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-offset-2">Start survey</button>
 	<button class="entry-button quit text-white ring-2 rounded-md ring-red-800 transition-duration-300 transform hover:scale-105 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-offset-2">Quit</button>
 </div>
+
+{/if}
 
 <style>
     .entry {

@@ -1,12 +1,7 @@
 import logo from './images/logo.svg';
 import profilePhoto from './images/profile.png'
-import * as fetch from "./fetcher"
 
-const token = (await fetch.loginUser("user@example.com", "user123!@#"))['data']['token'];
-
-const profile = await fetch.getProfile(token);
-
-const name = profile['data']['name'];
+const name ='a'
 
 export const linkUtil = {
     logo: true,
