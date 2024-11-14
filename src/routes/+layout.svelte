@@ -8,9 +8,9 @@
 	const profile = $page.data.profile || null;
 
 	if (profile !== null){
-		linkUtil['links']['linkText'] = profile['name'];
+		linkUtil['links'][0]['linkText'] = profile['name'];
 	} else {
-		linkUtil['links']['linkText'] = "Sign in!";
+		linkUtil['links'][0]['linkText'] = "Sign in!";
 	}
 </script>
 

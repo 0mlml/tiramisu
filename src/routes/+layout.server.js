@@ -8,5 +8,6 @@ export const load = async (event) => {
     if (token !== null){
         profile = (await fetcher.getProfile(token))['data'];
     }
+
     return { profile };
 };
