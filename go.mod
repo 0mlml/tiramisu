@@ -3,7 +3,6 @@ module tiramisu
 go 1.21.3
 
 require (
-	github.com/0mlml/cfgparser v1.2.0 // indirect
 	github.com/boltdb/bolt v1.3.1 // indirect
 	github.com/br0xen/boltbrowser v0.0.0-20230531143731-fcc13603daaf // indirect
 	github.com/br0xen/termbox-util v0.0.0-20170904143325-de1d4c83380e // indirect

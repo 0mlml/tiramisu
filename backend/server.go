@@ -1,15 +1,21 @@
 package backend
 
 import (
+	"flag"
+
 	"github.com/gin-gonic/gin"
 )
 
-var router *gin.Engine
-var db *DB
+var (
+	router *gin.Engine
+	db     *DB
+	dbPath = flag.String("db", "tiramisu.db", "Path to the database file")
+	port   = flag.String("port", "8080", "Port to run the server on")
+)
 
 func Main() {
 	var err error
-	db, err = newDB(config.String("db_path"))
+	db, err = newDB(*dbPath)
 	if err != nil {
 		panic(err)
 	}
@@ -19,5 +25,5 @@ func Main() {
 
 	initializeRoutes(router)
 
-	router.Run(":8080")
+	router.Run(":" + *port)
 }

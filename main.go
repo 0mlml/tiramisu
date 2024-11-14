@@ -7,6 +7,5 @@ import (
 
 func main() {
 	flag.Parse()
-	backend.ConfigInit()
 	backend.Main()
 }
