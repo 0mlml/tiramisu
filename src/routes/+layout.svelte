@@ -1,25 +1,38 @@
 <script>
-	import { linkUtil } from '$lib/linkUtil';
-	import { page } from '$app/stores';
-	import '../app.css';
-	import Topbar from '$lib/components/TopBar.svelte';
+	import { linkUtil } from "$lib/linkUtil";
+	import { page } from "$app/stores";
+	import "../app.css";
+	import Topbar from "$lib/components/TopBar.svelte";
 	let { children } = $props();
 
-	const profile = $page.data.profile || null;
+	let isProfileReady = $state(false);
+	let profile = $page.data.profile || null;
 
 	if (profile !== null){
-		linkUtil['links'][0]['linkText'] = profile['name'];
+		linkUtil["links"][0]["linkText"] = profile["name"];
+		if (profile["picture"] !== ""){
+			linkUtil["links"][0]["picture"] = profile["picture"];
+		}
+		isProfileReady = true;
 	} else {
-		linkUtil['links'][0]['linkText'] = "Sign in!";
+		linkUtil["links"][0]["linkText"] = "Sign in";
+		linkUtil["links"][0]["url"] = "/sign-in" 
+		isProfileReady = true;
 	}
 </script>
 
 <div class="app">
+	{#if isProfileReady}
 	<Topbar data={linkUtil}/>
 
 	<main>
 		{@render children()}
 	</main>
+	{/if}
+
+	{#if !isProfileReady}
+	<h1> Loading... </h1>
+	{/if}
 
 	<footer>
 		<p>

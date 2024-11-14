@@ -81,3 +81,8 @@ type SubmissionResponse struct {
 type UserSubmissionsResponse struct {
 	Submissions []Submission `json:"submissions"`
 }
+
+// UsersResponse represents a list of users
+type UsersResponse struct {
+	Users []User `json:"users"`
+}

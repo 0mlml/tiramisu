@@ -27,24 +27,20 @@
 <nav class={clicked? 'navbar-clicked' : 'navbar'}>
     <div class="menu-icon">
         <div class="icon-wrapper">
-          <button on:click={handleClick}>
-            <i class={clicked? 'fa fa-times' : 'fas fa-bars'} />
+          <button on:click={handleClick} aria-label="Toggle menu">
+            <i class={clicked? 'fa fa-times' : 'fas fa-bars'}></i>
           </button>
         </div>
         <a class="logo-link-text w-20 h-20" href={data.linkUrl}><img class='logo' src={data.logoSrc} alt={data.altText}/>{data.optionalLinkText? data.optionalLinkText : ' '} </a>
     </div>
     {#each data.links as link}
         {#if link.displayInNav}
-            {#if link.picture}
             <div class={clicked? 'navbar-item-clicked' : 'navbar-item'}>
                 <a class='link-text' href={link.url} on:click={resetClick}>{link.linkText}</a>
-                <img class='profile rounded-full w-10 h-10' src={link.picture} alt={''}/>
+                  {#if link.linkText !== "Sign in"}
+                  <img class='profile rounded-full w-10 h-10' src={link.picture} alt={''}/>
+                  {/if}
             </div>
-            {:else}
-            <div class={clicked? 'navbar-item-clicked' : 'navbar-item'}>
-                <a class='link-text' href={link.url} on:click={resetClick}>{link.linkText}</a>
-            </div>
-            {/if}
         {/if}
     {/each}
 
@@ -88,7 +84,7 @@
         height: 4em;
         color: #FFF;   
         font-size: 1.5em; 
-        grid-template-columns: 1fr 0.3fr;
+        grid-template-columns: 1fr 0.5fr;
         align-items: center;
         column-gap: 0.5em;  
         font-family: 'League Spartan';

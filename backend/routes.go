@@ -38,6 +38,7 @@ func initializeRoutes(router *gin.Engine) {
 			admin.POST("/questions", handleCreateQuestion)
 			admin.PUT("/questions/:id", handleUpdateQuestion)
 			admin.DELETE("/questions/:id", handleDeleteQuestion)
+			admin.GET("/users", handleGetAllUsers)
 			admin.GET("/submissions/all", handleGetAllSubmissions)
 		}
 	}
@@ -192,7 +193,6 @@ func handleUpdateProfile(c *gin.Context) {
 	err := db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(usersBucket)
 
-		// Get existing user
 		userData := b.Get([]byte(userID.(string)))
 		if userData == nil {
 			return errors.New("user not found")
@@ -203,11 +203,9 @@ func handleUpdateProfile(c *gin.Context) {
 			return err
 		}
 
-		// Update fields
 		user.Name = updateReq.Name
 		user.Picture = updateReq.Picture
 
-		// Save updated user
 		buf, err := json.Marshal(user)
 		if err != nil {
 			return err
@@ -246,7 +244,6 @@ func handleCreateQuestion(c *gin.Context) {
 		return
 	}
 
-	// Validate question type
 	validType := false
 	for _, t := range questionTypes {
 		if question.Type == t {
@@ -259,7 +256,6 @@ func handleCreateQuestion(c *gin.Context) {
 		return
 	}
 
-	// Validate scale questions have min and max
 	if question.Type == "scale" && (question.Min == 0 || question.Max == 0) {
 		c.JSON(http.StatusBadRequest, GenericResponse{Success: false, Data: "Scale questions require min and max values"})
 		return
@@ -285,16 +281,13 @@ func handleUpdateQuestion(c *gin.Context) {
 	err := db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(questionsBucket)
 
-		// Check if question exists
 		existing := b.Get([]byte(questionID))
 		if existing == nil {
 			return errors.New("question not found")
 		}
 
-		// Ensure ID matches
 		updateReq.ID = questionID
 
-		// Validate question type
 		validType := false
 		for _, t := range questionTypes {
 			if updateReq.Type == t {
@@ -327,7 +320,6 @@ func handleDeleteQuestion(c *gin.Context) {
 	err := db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(questionsBucket)
 
-		// Check if question exists
 		if existing := b.Get([]byte(questionID)); existing == nil {
 			return errors.New("question not found")
 		}
@@ -356,7 +348,6 @@ func handleSubmitQuestionnaire(c *gin.Context) {
 		return
 	}
 
-	// Validate that all questions exist
 	questions, err := db.GetQuestions()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, GenericResponse{Success: false, Data: "Failed to validate questions"})
@@ -414,7 +405,6 @@ func handleGetSubmission(c *gin.Context) {
 		return
 	}
 
-	// Only allow users to see their own submissions unless they're an admin
 	if !isAdmin.(bool) && submission.UserID != userID.(string) {
 		c.JSON(http.StatusForbidden, GenericResponse{Success: false, Data: "Access denied"})
 		return
@@ -440,11 +430,30 @@ func handleGetUserSubmissions(c *gin.Context) {
 	})
 }
 
+func handleGetAllUsers(c *gin.Context) {
+	users, err := db.GetAllUsers()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, GenericResponse{Success: false, Data: "Failed to fetch users"})
+		return
+	}
+
+	c.JSON(http.StatusOK, GenericResponse{
+		Success: true,
+		Data: UsersResponse{
+			Users: users,
+		},
+	})
+}
+
 func handleGetAllSubmissions(c *gin.Context) {
 	submissions, err := db.GetAllSubmissions()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, GenericResponse{Success: false, Data: "Failed to fetch submissions"})
 		return
+	}
+
+	if submissions == nil {
+		submissions = []Submission{}
 	}
 
 	c.JSON(http.StatusOK, GenericResponse{

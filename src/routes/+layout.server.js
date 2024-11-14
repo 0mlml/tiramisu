@@ -6,7 +6,7 @@ export const load = async (event) => {
     let profile = null;
   
     if (token !== null){
-        profile = (await fetcher.getProfile(token))['data'];
+        profile = (await fetcher.getProfile(token))["data"];
     }
 
     return { profile };

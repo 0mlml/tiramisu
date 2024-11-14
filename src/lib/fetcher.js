@@ -21,7 +21,7 @@ export const loginUser = async function (email, pass) {
 
     } catch (error) {
         console.error("Login failed:", error);
-        throw error; 
+        throw error;
     }
 };
 
@@ -43,6 +43,6 @@ export const getProfile = async function (token) {
 
     } catch (error) {
         console.error("Getting profile failed:", error);
-        throw error; 
+        throw error;
     }
 };

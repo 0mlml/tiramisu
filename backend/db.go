@@ -84,6 +84,24 @@ func (db *DB) GetUser(id string) (*User, error) {
 	return &user, err
 }
 
+func (db *DB) GetAllUsers() ([]User, error) {
+	var users []User
+	err := db.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket(usersBucket)
+		c := b.Cursor()
+
+		for k, v := c.First(); k != nil; k, v = c.Next() {
+			var user User
+			if err := json.Unmarshal(v, &user); err != nil {
+				return err
+			}
+			users = append(users, user)
+		}
+		return nil
+	})
+	return users, err
+}
+
 func (db *DB) GetUserByEmail(email string) (*User, error) {
 	var user User
 	err := db.View(func(tx *bolt.Tx) error {

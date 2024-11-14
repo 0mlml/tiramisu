@@ -5,7 +5,7 @@ export const load = async (event) => {
   const token = event.cookies.get("auth_token");
 
   if (token && token !== "") {
-    throw redirect(301, "/home");
+    throw redirect(301, "/");
   }
 };
 
@@ -16,18 +16,21 @@ export const actions = {
     const password = formData.get("password");
 
     if (!email || !password) {
-      throw error(400, "must provide an email and password");
+      throw error(400, "Must provide an email and password");
     }
 
-    try{
-        const token = (await fetcher.loginUser(email, password))["data"]["token"];
-        event.cookies.set("auth_token", token ?? "", {
-            path: "/",
-        });    
-    }catch (err) {
-        console.error("Error fetching token", err);
-    }
+    const response = await fetcher.loginUser(email, password).catch((error) => {
+      throw error(400, "Invalid email or password");
+    });
+    const token = response.data.token;
 
-    throw redirect(301, "/home");
+    event.cookies.set("auth_token", token ?? "", {
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production"
+    });
+
+    return { success: true, token };
   },
 };
