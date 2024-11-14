@@ -12,6 +12,7 @@ export const load = async (event) => {
 
     if (profile !== null){
 		linkUtil["links"][0]["linkText"] = profile["name"];
+		linkUtil["links"][0]["url"] = "/profile" 
 		if (profile["picture"] !== ""){
 			linkUtil["links"][0]["picture"] = profile["picture"];
 		}

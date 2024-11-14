@@ -109,7 +109,7 @@
 								<div>
 									<h2 class="text-2xl font-bold">{profile.name}</h2>
 									<p class="text-gray-600">
-										Member since {new Date(profile.created).toLocaleDateString()}
+										Member since {profile.created}
 									</p>
 									{#if profile.is_admin}
 										<span

@@ -166,19 +166,13 @@ func handleGetProfile(c *gin.Context) {
 			Name:    user.Name,
 			Picture: user.Picture,
 			IsAdmin: user.IsAdmin,
+			Created: user.Created.String(),
 		},
 	})
 }
 
 func handleUpdateProfile(c *gin.Context) {
 	userID, _ := c.Get("userID")
-	isAdmin, _ := c.Get("isAdmin")
-
-	// Check authorization
-	if userID == nil || userID.(string) == "" || (userID.(string) != c.Param("id") && isAdmin != true) {
-		c.JSON(http.StatusUnauthorized, GenericResponse{Success: false, Data: "Unauthorized"})
-		return
-	}
 
 	var updateReq struct {
 		Name    string `json:"name"`
