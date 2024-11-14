@@ -28,13 +28,13 @@ func initializeRoutes(router *gin.Engine) {
 
 		// Questionnaire submissions
 		protected.POST("/submit", handleSubmitQuestionnaire)
-		protected.GET("/submissions", handleGetUserSubmissions)
-		protected.GET("/submissions/:id", handleGetSubmission)
 
 		// Admin routes
 		admin := protected.Group("/admin")
 		admin.Use(adminMiddleware())
 		{
+			admin.GET("/submissions", handleGetUserSubmissions)
+			admin.GET("/submissions/:id", handleGetSubmission)
 			admin.POST("/questions", handleCreateQuestion)
 			admin.PUT("/questions/:id", handleUpdateQuestion)
 			admin.DELETE("/questions/:id", handleDeleteQuestion)

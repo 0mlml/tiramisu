@@ -1,5 +1,3 @@
-github.com/0mlml/cfgparser v1.2.0 h1:XbnGgANMN7sy/+7lVd4OwTV6Xgc8qniJ+2sx18pEl3E=
-github.com/0mlml/cfgparser v1.2.0/go.mod h1:UNZi9H4VLBE0fUUSuc/oG0il8Yjzc29+zOpP50p0FF0=
 github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
 github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
 github.com/br0xen/boltbrowser v0.0.0-20230531143731-fcc13603daaf h1:NyqdH+vWNYPwQIK9jNv7sdIVbRGclwIdFhQk3+qlNEs=
